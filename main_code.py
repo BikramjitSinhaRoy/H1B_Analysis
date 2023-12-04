@@ -24,9 +24,11 @@ h1b = pd.read_csv('h1b_data_10ksample.csv', encoding='ISO-8859-1')
 
 
 
-st.markdown('''
-            # Analysing H1B Data
-            ''')
+# st.markdown('''
+#             # Analysing H1B Data
+#             ''')
+
+st.title('Analysing H1B Data')
 st.markdown('''
             ### Top Cities
             ''')
