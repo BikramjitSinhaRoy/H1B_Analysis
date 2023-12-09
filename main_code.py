@@ -6,7 +6,6 @@ import altair as alt
 alt.data_transformers.enable("vegafusion")
 
 # merging csv files 
-# merging csv files 
 df1 = pd.read_csv('data/h1b_0_row_100000_88656646-f04a-4c03-babd-35dc1c45e013.csv')
 df2 = pd.read_csv('data/h1b_1_row_100000_0722dbd9-add3-4fa0-a4b3-84ccbb1bc301.csv')
 df3 = pd.read_csv('data/h1b_2_row_100000_db8275ad-f4c7-44b6-b9fa-f828723862b6.csv')
