@@ -35,6 +35,10 @@ df25 = pd.read_csv('data/h1b_24_row_100000_5272a115-0942-4b85-8dea-7e0718adb3b6.
 h1b = pd.concat([df1,df2,df3,df4,df5,df6,df7,df8,df9,df10,df11,df12,df13,df14,df15,df16,df17,df18,df19,df20,df21,df22,df23,df24,df25], ignore_index=True) 
 
 
+
+st.dataframe(h1b)
+st.write('hello')
+
 # h1b = pd.read_csv('h1b_data_10ksample.csv', encoding='ISO-8859-1')
 
 # st.write(h1b)
