@@ -5,8 +5,18 @@ import streamlit as st
 import altair as alt
 alt.data_transformers.enable("vegafusion")
 
+# merging csv files 
+df = pd.concat( 
+    map(pd.read_csv, ['mydata.csv', 'mydata1.csv']), ignore_index=True) 
+print(df) 
 
-h1b = pd.read_csv('h1b_data_10ksample.csv', encoding='ISO-8859-1')
+
+
+
+
+
+
+# h1b = pd.read_csv('h1b_data_10ksample.csv', encoding='ISO-8859-1')
 
 # st.write(h1b)
 
