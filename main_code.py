@@ -1,4 +1,4 @@
-# run this command in terminal streamlit run code_1.py --server.maxMessageSize 400
+# run this command in terminal streamlit run main_code.py --server.maxMessageSize 400
 
 import pandas as pd
 import streamlit as st
