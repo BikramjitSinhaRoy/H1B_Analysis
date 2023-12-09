@@ -71,3 +71,13 @@ bar2 = alt.Chart(top_city_count).mark_bar().encode(
 alt.X('count', title='Number of Applications'),
 alt.Y('WORKSITE_CITY', sort='-x', title='City'))
 st.altair_chart(bar2, use_container_width=True)
+
+
+
+
+
+# top states based on Certified
+
+state_count = h1b[h1b['CASE_STATUS']=='Certified'].groupby(['WORKSITE_STATE'])['CASE_STATUS'].count().reset_index(name='count')
+top_state_count = state_count.sort_values('count', ascending=False).head(10)
+st.write(top_state_count)
