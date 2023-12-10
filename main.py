@@ -1,3 +1,5 @@
+# run this command in terminal streamlit run main.py --server.maxMessageSize 400
+
 from pathlib import Path
 import pandas as pd
 import numpy as np
