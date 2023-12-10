@@ -1,4 +1,4 @@
-# if streamlit run main_code.py gives error, then run this command in terminal streamlit run main_code.py --server.maxMessageSize 400
+# if streamlit run main_code.py gives error, then run this command in terminal streamlit run main.py --server.maxMessageSize 400
 
 import pandas as pd
 import streamlit as st
