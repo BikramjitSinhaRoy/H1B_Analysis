@@ -51,9 +51,8 @@ st.title('Analysing H1B Data')
 # alt.Y('WORKSITE_CITY', sort='-x', title='City'))
 # st.altair_chart(bar2, use_container_width=True)
 
-# Slider
 
-number_of_states = st.sidebar.slider("Number of States",min_value=1,max_value=20,value=5, step=1)
+number_of_states = st.slider("Number of States",min_value=1,max_value=20,value=5, step=1)
 
 
 st.subheader('TOP STATES')
@@ -120,3 +119,23 @@ alt.X('count', title='Number of Applications'),
 alt.Y('EMPLOYER_NAME', sort='-x', title='Employer'))
 
 st.altair_chart(emp_bar, use_container_width=True)
+
+# TOP JOB TITLES
+
+# give the STATE list as option to choose to the user
+# user selects one of the states from the list
+# search EMPLOYERS based on the USER_STATE variable
+
+# top cities based on USER_variable, for now lets assume user_variable == 'CA'
+
+
+top_jobs = h1b[(h1b['CASE_STATUS']=='Certified') & (h1b['state_name'] == user_state)].groupby(['SOC_TITLE'])['CASE_STATUS'].count().reset_index(name='count')
+top_job_count = top_jobs.sort_values('count', ascending=False).head(10)
+
+st.subheader("Top 10 Jobs")
+job_bar = alt.Chart(top_job_count).mark_bar().encode(
+alt.X('count', title='Number of Applications'),
+alt.Y('SOC_TITLE', sort='-x', title='Job Title'))
+
+st.altair_chart(job_bar, use_container_width=True)
+
