@@ -36,16 +36,87 @@ def load_data():
 h1b= load_data()
 
 st.title('Analysing H1B Data')
-st.markdown('''
-            ### Top Cities
-            ''')
 
-st.sidebar.header('Top cities based on number of applications')
-number_of_cities = st.sidebar.slider("Number of Cities",min_value=1,max_value=20,value=5, step=1)
+# st.markdown('''
+#             ### Top Cities
+#             ''')
 
-city_count = h1b.groupby(['WORKSITE_CITY'])['CASE_NUMBER'].count().reset_index(name='count')
-top_city_count = city_count.sort_values('count', ascending=False).head(number_of_cities)
-bar2 = alt.Chart(top_city_count).mark_bar().encode(
+# st.sidebar.header('Top cities based on number of applications')
+# number_of_cities = st.sidebar.slider("Number of Cities",min_value=1,max_value=20,value=5, step=1)
+
+# city_count = h1b.groupby(['WORKSITE_CITY'])['CASE_NUMBER'].count().reset_index(name='count')
+# top_city_count = city_count.sort_values('count', ascending=False).head(number_of_cities)
+# bar2 = alt.Chart(top_city_count).mark_bar().encode(
+# alt.X('count', title='Number of Applications'),
+# alt.Y('WORKSITE_CITY', sort='-x', title='City'))
+# st.altair_chart(bar2, use_container_width=True)
+
+# Slider
+
+number_of_states = st.sidebar.slider("Number of States",min_value=1,max_value=20,value=5, step=1)
+
+
+st.subheader('TOP STATES')
+# TOP STATES
+
+# top states based on Certified
+
+state_count = h1b[h1b['CASE_STATUS']=='Certified'].groupby(['WORKSITE_STATE','state_name', 'popullation'])['CASE_STATUS'].count().reset_index(name='count')
+state_count['count_per_10k'] = ((state_count['count']/state_count['popullation'])*10000).round(0)
+top_state_count = state_count.sort_values('count_per_10k', ascending=False).head(number_of_states)
+
+state_bar = alt.Chart(top_state_count).mark_bar().encode(
+alt.X('count_per_10k', title='Number of Applications per 10k people'),
+alt.Y('state_name', sort='-x', title='State'))
+
+st.altair_chart(state_bar, use_container_width=True)
+
+#getting states in a list
+
+list_of_top_states = top_state_count['state_name'].tolist()
+
+# displaying it in the sidebar
+
+user_state = st.selectbox(
+    'Select a State',
+    (list_of_top_states))
+
+st.write('You selected:', user_state)
+
+# TOP CITIES
+h1b.loc[h1b.WORKSITE_STATE == 'DC', 'WORKSITE_CITY'] = "Washington"
+# give this list as option to choose to the user
+# user selects one of the states from the list
+# search cities based on the USER_STATE variable
+
+top_cities = h1b[(h1b['CASE_STATUS']=='Certified') & (h1b['state_name'] == user_state)].groupby(['WORKSITE_CITY'])['CASE_STATUS'].count().reset_index(name='count')
+top_cities_count = top_cities.sort_values('count', ascending=False).head(5)
+
+st.subheader("Top 5 Cities")
+city_bar = alt.Chart(top_cities_count).mark_bar().encode(
 alt.X('count', title='Number of Applications'),
 alt.Y('WORKSITE_CITY', sort='-x', title='City'))
-st.altair_chart(bar2, use_container_width=True)
+
+st.altair_chart(city_bar, use_container_width=True)
+
+
+# TOP EMPLOYERS
+
+# give the STATE list as option to choose to the user
+# user selects one of the states from the list
+# search EMPLOYERS based on the USER_STATE variable
+
+# top cities based on USER_variable, for now lets assume user_variable == 'CA'
+
+# can make a word map
+
+
+top_emp = h1b[(h1b['CASE_STATUS']=='Certified') & (h1b['state_name'] == user_state)].groupby(['EMPLOYER_NAME'])['CASE_STATUS'].count().reset_index(name='count')
+top_emp_count = top_emp.sort_values('count', ascending=False).head(10)
+
+st.subheader("Top 10 Employers")
+emp_bar = alt.Chart(top_emp_count).mark_bar().encode(
+alt.X('count', title='Number of Applications'),
+alt.Y('EMPLOYER_NAME', sort='-x', title='Employer'))
+
+st.altair_chart(emp_bar, use_container_width=True)
