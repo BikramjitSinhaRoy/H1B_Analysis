@@ -17,6 +17,9 @@ alt.data_transformers.enable("vegafusion")
 # df = load_data("<path to csv>")
 # st.dataframe(df)
 
+
+# st.set_page_config(layout="wide")
+
 @st.cache_data
 def load_data():
     path = r'data'  # or unix / linux / mac path
@@ -35,6 +38,8 @@ def load_data():
 
 h1b= load_data()
 
+
+
 st.title('Analysing H1B Data')
 
 # st.markdown('''
@@ -52,7 +57,7 @@ st.title('Analysing H1B Data')
 # st.altair_chart(bar2, use_container_width=True)
 
 
-number_of_states = st.slider("Number of States",min_value=1,max_value=20,value=5, step=1)
+number_of_states = st.slider("Number of States",min_value=1,max_value=51,value=10, step=1)
 
 
 st.subheader('TOP STATES')
@@ -82,7 +87,7 @@ user_state = st.selectbox(
 
 # st.write('You selected:', user_state)
 
-col1, col2 = st.columns(2)
+col1, col2 = st.columns(2, gap="large")
 
 with col1:
     st.write(":red[Total Number of Employers]")
