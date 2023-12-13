@@ -10,5 +10,7 @@ If you plan to work in the US on H-1B Visa, The LCA is a document that the emplo
 
 # Data Sources
 1. The dataset contains more than 2.4 million LCA disclosure data records (2019 - 2023) from the United States Department of Labor (https://www.dol.gov/agencies/eta/foreign-labor/performance)
+2. The geojson file for US State Boundaries (https://public.opendatasoft.com/explore/dataset/us-state-boundaries/export/?flg=en-us)
+3. The US state population data (https://www.census.gov/data/tables/time-series/demo/popest/2020s-state-total.html)
 
 
