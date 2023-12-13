@@ -24,11 +24,43 @@ def load_data():
 
 h1b= load_data()
 
-st.header("US State - Drill Down")
+st.title("US State - Drill Down")
 
 #getting states in a list
 
 user_state = st.selectbox('Select a State', sorted(h1b['state_name'].unique().tolist()))
+
+
+col1, col2, col3 = st.columns(3, gap="large")
+
+with col1:
+    st.markdown('''
+            ##### Certified Cases
+            ''')
+    state_data = h1b[(h1b['CASE_STATUS']=='Certified') & (h1b['state_name'] == user_state)].groupby(['state_name', 'EMPLOYER_NAME']).agg({'CASE_STATUS': 'size', 'PREVAILING_WAGE': 'median'}).rename(columns={'CASE_STATUS' : 'count', 'PREVAILING_WAGE': 'median_wage'}).reset_index()
+    total = state_data['count'].sum()
+    st.header(f":red[{total}]")
+
+with col2:
+    st.markdown('''
+            ##### Number of Employers
+            ''')
+    state_data = h1b[(h1b['CASE_STATUS']=='Certified') & (h1b['state_name'] == user_state)].groupby(['state_name', 'EMPLOYER_NAME']).agg({'CASE_STATUS': 'size', 'PREVAILING_WAGE': 'median'}).rename(columns={'CASE_STATUS' : 'count', 'PREVAILING_WAGE': 'median_wage'}).reset_index()
+    count = len(state_data['EMPLOYER_NAME'].unique())
+    st.header(f":red[{count}]")
+
+with col3:
+    st.markdown('''
+            ##### Median Wage
+            ''')
+    state_data = h1b[(h1b['CASE_STATUS']=='Certified') & (h1b['state_name'] == user_state)].groupby(['state_name', 'EMPLOYER_NAME']).agg({'CASE_STATUS': 'size', 'PREVAILING_WAGE': 'median'}).rename(columns={'CASE_STATUS' : 'count', 'PREVAILING_WAGE': 'median_wage'}).reset_index()
+    wage = state_data['median_wage'].median()
+    st.header(f":red[${wage}]")
+
+
+
+
+
 
 tab1, tab2, tab3 = st.tabs(["Top Cities", "Top Employers", "Top Jobs"])
 

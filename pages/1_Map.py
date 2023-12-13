@@ -68,18 +68,22 @@ selected_state = ''
 if st_map['last_active_drawing']:
     selected_state = st_map['last_active_drawing']['properties']['name']
 
-state_count2 = h1b[h1b['CASE_STATUS']=='Certified'].groupby(['state_name', 'popullation']).agg({'CASE_STATUS': 'size', 'PREVAILING_WAGE': 'median'}).rename(columns={'CASE_STATUS' : 'count', 'PREVAILING_WAGE': 'median_wage'}).reset_index()
+state_count2 = h1b[h1b['CASE_STATUS']=='Certified'].groupby(['state_name', 'popullation', 'EMPLOYER_NAME']).agg({'CASE_STATUS': 'size', 'PREVAILING_WAGE': 'median'}).rename(columns={'CASE_STATUS' : 'count', 'PREVAILING_WAGE': 'median_wage'}).reset_index()
 state_count2['count_per_10k'] = ((state_count2['count']/state_count2['popullation'])*10000).round(0)
 if selected_state:
     state_count2 = state_count2[state_count2['state_name']== selected_state]
 
-col1, col2 = st.columns(2, gap="large")
+col1, col2, col3 = st.columns(3, gap="large")
 with col1:
     total = state_count2['count'].sum()
-    st.write(f"Certified Cases :red[{selected_state}]")
+    st.write(f"**Certified Cases :red[{selected_state}]**")
     st.subheader(total)
 with col2:
     wage = state_count2['median_wage'].median()
-    st.write(f"Median Wage :red[{selected_state}]")
+    st.write(f"**Median Wage :red[{selected_state}]**")
     st.subheader(f"${wage}")
+with col3:
+    count = len(state_count2['EMPLOYER_NAME'].unique())
+    st.write(f"**Number of Employers :red[{selected_state}]**")
+    st.subheader(f"${count}")
 
