@@ -69,11 +69,11 @@ state_count = h1b[h1b['CASE_STATUS']=='Certified'].groupby(['WORKSITE_STATE','st
 state_count['count_per_10k'] = ((state_count['count']/state_count['popullation'])*10000).round(0)
 top_state_count = state_count.sort_values('count_per_10k', ascending=False).head(number_of_states)
 
-state_bar = alt.Chart(top_state_count).mark_bar(color='orange').encode(
+temp_bar = alt.Chart(top_state_count).mark_bar(color='orange').encode(
 alt.X('count_per_10k', title='Number of Applications per 10k people'),
 alt.Y('state_name', sort='-x', title='State'))
 
-st.altair_chart(state_bar, use_container_width=True)
+st.altair_chart(temp_bar, use_container_width=True)
 
 #getting states in a list
 
@@ -97,9 +97,9 @@ with col1:
 
 with col2:
     st.write(":red[Median Wage]")
-    state_count2 = h1b[h1b['CASE_STATUS']=='Certified'].groupby(['WORKSITE_STATE','state_name', 'popullation']).agg({'CASE_STATUS': 'size', 'PREVAILING_WAGE': 'median'}).rename(columns={'CASE_STATUS' : 'count', 'PREVAILING_WAGE': 'median_wage'}).reset_index()
-    state_count2['count_per_10k'] = ((state_count2['count']/state_count2['popullation'])*10000).round(0)
-    user_state_median_wage = state_count2.loc[state_count2['state_name'] == user_state, 'median_wage'].values[0]
+    temp = h1b[h1b['CASE_STATUS']=='Certified'].groupby(['WORKSITE_STATE','state_name', 'popullation']).agg({'CASE_STATUS': 'size', 'PREVAILING_WAGE': 'median'}).rename(columns={'CASE_STATUS' : 'count', 'PREVAILING_WAGE': 'median_wage'}).reset_index()
+    temp['count_per_10k'] = ((temp['count']/temp['popullation'])*10000).round(0)
+    user_state_median_wage = temp.loc[temp['state_name'] == user_state, 'median_wage'].values[0]
     st.subheader(f"${user_state_median_wage}")
   
 
@@ -162,3 +162,19 @@ alt.Y('SOC_TITLE', sort='-x', title='Job Title'))
 
 st.altair_chart(job_bar, use_container_width=True)
 
+
+
+
+## Temp
+
+temp = h1b[h1b['CASE_STATUS']=='Certified'].groupby(['WORKSITE_STATE','state_name', 'popullation']).agg({'CASE_STATUS': 'size', 'PREVAILING_WAGE': 'median'}).rename(columns={'CASE_STATUS' : 'count', 'PREVAILING_WAGE': 'median_wage'}).reset_index()
+temp['count_per_10k'] = ((temp['count']/temp['popullation'])*10000).round(0)
+top_emp2 = temp.sort_values('count_per_10k', ascending=False).head(5)
+
+
+temp_bar = alt.Chart(top_emp2).mark_bar().encode(
+alt.X('count_per_10k', title='Number of Applications per 10k people'),
+alt.Y('state_name', sort='-x', title='State'),
+alt.Color('median_wage:Q', title='Median Wage', scale=alt.Scale(scheme='tealblues')))
+
+st.altair_chart(temp_bar, use_container_width=True)
