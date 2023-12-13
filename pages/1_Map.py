@@ -85,5 +85,5 @@ with col2:
 with col3:
     count = len(state_count2['EMPLOYER_NAME'].unique())
     st.write(f"**Number of Employers :red[{selected_state}]**")
-    st.subheader(f"${count}")
+    st.subheader(f"{count}")
 

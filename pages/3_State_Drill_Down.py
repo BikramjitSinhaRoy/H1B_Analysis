@@ -81,7 +81,7 @@ with tab1: # TOP CITIES
     
     if user_sort_city == 'Certified Count':
         top_cities_count = top_cities.sort_values('count', ascending=False).head(number_of_cities)
-        city_bar = alt.Chart(top_cities_count).mark_bar().encode(
+        city_bar = alt.Chart(top_cities_count).mark_bar(color='orange').encode(
         alt.X('count', title='Number of Certified'),
         alt.Y('WORKSITE_CITY', sort='-x', title='City'),
         tooltip=[alt.Tooltip('WORKSITE_CITY:N', title='City:'), alt.Tooltip('count:Q', title='Number of Certified:', format=',d'), alt.Tooltip('median_wage:Q', title='Median Wage ($):', format=',d')]
