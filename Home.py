@@ -1,3 +1,5 @@
+# run this command in terminal streamlit run Home.py --server.maxMessageSize 400
+
 import pandas as pd
 import streamlit as st
 import altair as alt
@@ -5,6 +7,8 @@ import folium
 from streamlit_folium import st_folium
 from branca.colormap import linear
 from pathlib import Path
+
+st.set_page_config(layout='wide')
 
 @st.cache_data
 def load_data():
@@ -23,8 +27,9 @@ def load_data():
     return df
 
 h1b= load_data()
-
-st.header("Certified Cases per 10k people by State")
+st.title("Analyzing H1B -LCA Trends across U.S. States")
+st.divider()
+st.subheader(":grey[Certified Cases per 10,000 people by State]")
 
 
 df = h1b[h1b['CASE_STATUS']=='Certified'].groupby(['state_name', 'popullation'])['CASE_STATUS'].count().reset_index(name='count')
@@ -86,4 +91,4 @@ with col3:
     count = len(state_count2['EMPLOYER_NAME'].unique())
     st.write(f"**Number of Employers :red[{selected_state}]**")
     st.subheader(f"{count}")
-
+    

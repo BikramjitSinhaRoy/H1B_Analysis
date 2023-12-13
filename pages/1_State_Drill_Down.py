@@ -24,7 +24,7 @@ def load_data():
 
 h1b= load_data()
 
-st.title("US State - Drill Down")
+st.title("Detailed Analysis of U.S. States")
 
 #getting states in a list
 
@@ -56,7 +56,6 @@ with col3:
     state_data = h1b[(h1b['CASE_STATUS']=='Certified') & (h1b['state_name'] == user_state)].groupby(['state_name', 'EMPLOYER_NAME']).agg({'CASE_STATUS': 'size', 'PREVAILING_WAGE': 'median'}).rename(columns={'CASE_STATUS' : 'count', 'PREVAILING_WAGE': 'median_wage'}).reset_index()
     wage = state_data['median_wage'].median()
     st.header(f":red[${wage}]")
-
 
 
 
