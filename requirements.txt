@@ -3,6 +3,6 @@ streamlit
 altair
 folium
 streamlit_folium
-branca.colormap
+branca
 pathlib
 numpy
