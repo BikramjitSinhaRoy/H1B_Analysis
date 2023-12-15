@@ -6,9 +6,9 @@ An interactive map of U.S. states is available, color-coded based on the number 
 
 2. State Overview
 Users can select a state of interest to obtain detailed information, including:
-- Median Wage: Explore the median wage for the selected state.
-- Total Employers: View the total number of employers in the chosen state.
-- Certified Cases: Access information on the total number of certified cases in the state.
+    - Median Wage: Explore the median wage for the selected state.
+    - Total Employers: View the total number of employers in the chosen state.
+    - Certified Cases: Access information on the total number of certified cases in the state.
 # Introduction
 If you plan to work in the US on H-1B Visa, The LCA is a document that the employer must file with the U.S. Department of Labor (DOL) before they can submit an H-1B visa petition to the U.S. Citizenship and Immigration Services (USCIS). A Certified LCA is one of the first steps toward getting your H-1B work visa in the U.S.
 
