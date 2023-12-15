@@ -9,6 +9,13 @@ Users can select a state of interest to obtain detailed information, including:
     - Median Wage: Explore the median wage for the selected state.
     - Total Employers: View the total number of employers in the chosen state.
     - Certified Cases: Access information on the total number of certified cases in the state.
+
+3. In-Depth State Analysis
+Users can delve deeper into specific states to uncover detailed information such as:
+    - Top Job Titles: Identify the most prevalent job titles in the selected state.
+    - Top Cities to Work In: Explore the top cities within the state for H-1B employment.
+    - Top Employers: Discover the leading employers based on either the highest certified case count or the highest median wage.
+    
 # Introduction
 If you plan to work in the US on H-1B Visa, The LCA is a document that the employer must file with the U.S. Department of Labor (DOL) before they can submit an H-1B visa petition to the U.S. Citizenship and Immigration Services (USCIS). A Certified LCA is one of the first steps toward getting your H-1B work visa in the U.S.
 
