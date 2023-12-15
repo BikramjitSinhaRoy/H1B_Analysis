@@ -65,6 +65,7 @@ tab1, tab2, tab3 = st.tabs(["Top Cities", "Top Employers", "Top Jobs"])
 
 with tab1: # TOP CITIES
     h1b.loc[h1b.WORKSITE_STATE == 'DC', 'WORKSITE_CITY'] = "Washington"
+    h1b.loc[h1b.state_name == 'District of Columbia', 'WORKSITE_CITY'] = "Washington"
     # give this list as option to choose to the user
     # user selects one of the states from the list
     # search cities based on the USER_STATE variable

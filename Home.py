@@ -26,6 +26,7 @@ def load_data():
     df = pd.concat(dfs, ignore_index=True)
     return df
 
+
 h1b= load_data()
 st.title("Analyzing H1B -LCA Trends across U.S. States")
 st.divider()
