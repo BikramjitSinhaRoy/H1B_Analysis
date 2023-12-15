@@ -82,14 +82,15 @@ if selected_state:
 col1, col2, col3 = st.columns(3, gap="large")
 with col1:
     total = state_count2['count'].sum()
-    st.write(f"**Certified Cases :red[{selected_state}]**")
+    st.write(f"**Certified Cases: :red[{selected_state}]**")
     st.subheader(total)
 with col2:
     wage = state_count2['median_wage'].median()
-    st.write(f"**Median Wage :red[{selected_state}]**")
+    st.write(f"**Median Wage: :red[{selected_state}]**")
+    wage= int(wage)
     st.subheader(f"${wage}")
 with col3:
     count = len(state_count2['EMPLOYER_NAME'].unique())
-    st.write(f"**Number of Employers :red[{selected_state}]**")
+    st.write(f"**Number of Employers: :red[{selected_state}]**")
     st.subheader(f"{count}")
     

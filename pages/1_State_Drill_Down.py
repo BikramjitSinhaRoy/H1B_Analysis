@@ -55,6 +55,7 @@ with col3:
             ''')
     state_data = h1b[(h1b['CASE_STATUS']=='Certified') & (h1b['state_name'] == user_state)].groupby(['state_name', 'EMPLOYER_NAME']).agg({'CASE_STATUS': 'size', 'PREVAILING_WAGE': 'median'}).rename(columns={'CASE_STATUS' : 'count', 'PREVAILING_WAGE': 'median_wage'}).reset_index()
     wage = state_data['median_wage'].median()
+    wage= int(wage)
     st.header(f":red[${wage}]")
 
 
@@ -92,7 +93,7 @@ with tab1: # TOP CITIES
 
     else:
         top_cities_count = top_cities.sort_values('median_wage', ascending=False).head(number_of_cities)
-        city_bar = alt.Chart(top_cities_count).mark_bar().encode(
+        city_bar = alt.Chart(top_cities_count).mark_bar(color='orange').encode(
         alt.X('median_wage', title='Median Wage'),
         alt.Y('WORKSITE_CITY', sort='-x', title='City'),
         tooltip=[alt.Tooltip('WORKSITE_CITY:N', title='City:'), alt.Tooltip('count:Q', title='Number of Certified:', format=',d'), alt.Tooltip('median_wage:Q', title='Median Wage ($):', format=',d')]
@@ -114,7 +115,7 @@ with tab2: # TOP EMPLOYERS
     if user_sort_emp == 'Certified Count':
         top_emp_count = top_emp.sort_values('count', ascending=False).head(number_of_employers)
 
-        emp_bar = alt.Chart(top_emp_count).mark_bar().encode(
+        emp_bar = alt.Chart(top_emp_count).mark_bar(color='orange').encode(
         alt.X('count', title='Number of Certified'),
         alt.Y('EMPLOYER_NAME', sort='-x', title='Employer'),
         tooltip=[alt.Tooltip('EMPLOYER_NAME:N', title='Employer:'), alt.Tooltip('count:Q', title='Number of Certified:', format=',d'), alt.Tooltip('median_wage:Q', title='Median Wage ($):', format=',d')]
@@ -126,7 +127,7 @@ with tab2: # TOP EMPLOYERS
     else:
         top_emp_count = top_emp.sort_values('median_wage', ascending=False).head(number_of_employers)
 
-        emp_bar = alt.Chart(top_emp_count).mark_bar().encode(
+        emp_bar = alt.Chart(top_emp_count).mark_bar(color='orange').encode(
         alt.X('median_wage', title='Median Wage'),
         alt.Y('EMPLOYER_NAME', sort='-x', title='Employer'),
         tooltip=[alt.Tooltip('EMPLOYER_NAME:N', title='Employer:'), alt.Tooltip('count:Q', title='Number of Certified:', format=',d'), alt.Tooltip('median_wage:Q', title='Median Wage ($):', format=',d')]
@@ -148,7 +149,7 @@ with tab3: #TOP JOB TITLES
 
     if user_sort_job == 'Certified Count':
         top_job_count = top_job.sort_values('count', ascending=False).head(number_of_jobs)
-        job_bar = alt.Chart(top_job_count).mark_bar().encode(
+        job_bar = alt.Chart(top_job_count).mark_bar(color='orange').encode(
             alt.X('count', title='Number of Certified'),
             alt.Y('SOC_TITLE', sort='-x', title='Job Title'),
             tooltip=[alt.Tooltip('SOC_TITLE:N', title='Job Title:'), alt.Tooltip('count:Q', title='Number of Certified:', format=',d'), alt.Tooltip('median_wage:Q', title='Median Wage ($):', format=',d')]
@@ -158,7 +159,7 @@ with tab3: #TOP JOB TITLES
 
     else:
         top_job_count = top_job.sort_values('median_wage', ascending=False).head(number_of_jobs)
-        job_bar = alt.Chart(top_job_count).mark_bar().encode(
+        job_bar = alt.Chart(top_job_count).mark_bar(color='orange').encode(
             alt.X('median_wage', title='Median Wage'),
             alt.Y('SOC_TITLE', sort='-x', title='Job Title'),
             tooltip=[alt.Tooltip('SOC_TITLE:N', title='Job Title:'), alt.Tooltip('count:Q', title='Number of Certified:', format=',d'), alt.Tooltip('median_wage:Q', title='Median Wage ($):', format=',d')]
