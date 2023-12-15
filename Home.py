@@ -30,7 +30,8 @@ def load_data():
 h1b= load_data()
 st.title("Analyzing H1B -LCA Trends across U.S. States")
 st.divider()
-st.subheader("Certified Cases per 10,000 people by State")
+st.subheader(f":blue[Certified Cases per 10,000 people by State]")
+st.caption("Select a State to get more information")
 
 
 df = h1b[h1b['CASE_STATUS']=='Certified'].groupby(['state_name', 'popullation'])['CASE_STATUS'].count().reset_index(name='count')
